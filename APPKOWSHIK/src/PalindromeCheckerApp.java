@@ -1,34 +1,38 @@
 public class PalindromeCheckerApp {
+
     public static void main(String[] args) {
-        // Declare and initialize the input string.
-        String input = "radar";
 
-        // Convert the string into a character array.
-        char[] chars = input.toCharArray();
+        // 1. Declare and initialize the input string.
+        String input = "noon";
 
-        // Initialize pointer at the beginning.
-        int start = 0;
+        // 2. Create a Stack to store characters.
+        Stack<Character> stack = new Stack<>();
 
-        // Initialize pointer at the end.
-        int end = chars.length - 1;
+        // 3. Push each character of the string into the stack.
+        // This stores them such that the last character is on top.
+        for (char c : input.toCharArray()) {
+            stack.push(c);
+        }
 
-        // Assume palindrome initially.
+        // 4. Assume palindrome initially.
         boolean isPalindrome = true;
 
-        // Continue comparison until pointers cross.
-        while (start < end) {
-            // Check if characters at the current pointers match
-            if (chars[start] != chars[end]) {
+        // 5. Iterate again through original string and compare with popped characters.
+        // stack.pop() returns the characters in reverse order (LIFO).
+        for (char c : input.toCharArray()) {
+            char reversedChar = stack.pop();
+
+            if (c != reversedChar) {
                 isPalindrome = false;
                 break; // Exit loop early if a mismatch is found
             }
-            // Move pointers towards the middle
-            start++;
-            end--;
         }
 
-        // Print the result as shown in the requirement
-        System.out.println("Input : " + input);
-        System.out.println("Is Palindrome? : " + isPalindrome);
+        // 6. Display the result
+        if (isPalindrome) {
+            System.out.println("The string \"" + input + "\" is a palindrome.");
+        } else {
+            System.out.println("The string \"" + input + "\" is NOT a palindrome.");
+        }
     }
 }
