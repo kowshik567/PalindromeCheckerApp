@@ -1,16 +1,38 @@
 public class PalindromeCheckerApp {
+
     public static void main(String[] args) {
-        String input = "madam";
+
+        // 1. Declare and initialize the input string.
+        String input = "noon";
+
+        // 2. Create a Stack to store characters.
+        Stack<Character> stack = new Stack<>();
+
+        // 3. Push each character of the string into the stack.
+        // This stores them such that the last character is on top.
+        for (char c : input.toCharArray()) {
+            stack.push(c);
+        }
+
+        // 4. Assume palindrome initially.
         boolean isPalindrome = true;
 
-        for (int i = 0; i < input.length() / 2; i++) {
-            if (input.charAt(i) != input.charAt(input.length() - 1 - i)) {
+        // 5. Iterate again through original string and compare with popped characters.
+        // stack.pop() returns the characters in reverse order (LIFO).
+        for (char c : input.toCharArray()) {
+            char reversedChar = stack.pop();
+
+            if (c != reversedChar) {
                 isPalindrome = false;
-                break;
+                break; // Exit loop early if a mismatch is found
             }
         }
 
-        System.out.println("Input text: " + input);
-        System.out.println("Is it a Palindrome?: " + isPalindrome);
+        // 6. Display the result
+        if (isPalindrome) {
+            System.out.println("The string \"" + input + "\" is a palindrome.");
+        } else {
+            System.out.println("The string \"" + input + "\" is NOT a palindrome.");
+        }
     }
 }
