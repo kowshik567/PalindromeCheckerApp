@@ -1,38 +1,38 @@
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
+
 public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
 
-        // 1. Declare and initialize the input string.
-        String input = "noon";
+        // Define the input string to validate
+        String input = "civic";
 
-        // 2. Create a Stack to store characters.
+        // Create a Queue to store characters in FIFO order
+        Queue<Character> queue = new LinkedList<>();
+
+        // Create a Stack to store characters in LIFO order
         Stack<Character> stack = new Stack<>();
 
-        // 3. Push each character of the string into the stack.
-        // This stores them such that the last character is on top.
+        // Insert each character into both queue and stack
         for (char c : input.toCharArray()) {
+            queue.add(c);
             stack.push(c);
         }
 
-        // 4. Assume palindrome initially.
+        // Flag to track palindrome status
         boolean isPalindrome = true;
 
-        // 5. Iterate again through original string and compare with popped characters.
-        // stack.pop() returns the characters in reverse order (LIFO).
-        for (char c : input.toCharArray()) {
-            char reversedChar = stack.pop();
-
-            if (c != reversedChar) {
+        // Compare characters until the queue becomes empty
+        while (!queue.isEmpty()) {
+            if (!queue.remove().equals(stack.pop())) {
                 isPalindrome = false;
-                break; // Exit loop early if a mismatch is found
+                break;
             }
         }
 
-        // 6. Display the result
-        if (isPalindrome) {
-            System.out.println("The string \"" + input + "\" is a palindrome.");
-        } else {
-            System.out.println("The string \"" + input + "\" is NOT a palindrome.");
-        }
+        System.out.println("Input : " + input);
+        System.out.println("Is Palindrome? : " + isPalindrome);
     }
 }
